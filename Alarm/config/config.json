@@ -1,5 +1,5 @@
 {
-  "httpport": 3000,
+  "httpport": 3001,
   "alarm": {
     "alarmpassword": "1234",
     "SHM": true,

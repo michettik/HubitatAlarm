@@ -80,7 +80,7 @@ wss.on('connection', function connection(ws) {
 //app.use(express.json());
 // Used only to check if Alarm is running
 app.get('/', function (req, res) {
-    res.send('<html><body><h1>Hubitat Alarm Running</h1></body></html>');
+    res.send('<html><body><h1>HomeAssistant Alarm Running</h1></body></html>');
 });
 
 app.get('/api/:command',function (req, res) {
