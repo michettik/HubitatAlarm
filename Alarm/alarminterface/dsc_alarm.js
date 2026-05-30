@@ -34,20 +34,20 @@ class dsc_alarm extends EventEmitter {
         }
     }
 
-    alarmArm() {
-        self.#sendCommand(_dsc_commands.alarmArm());
+    alarmArm(code) {
+        self.#sendCommand(_dsc_commands.alarmArm(code));
     }
-    alarmArmAway() {
-        self.#sendCommand(_dsc_commands.alarmArmAway());
+    alarmArmAway(code) {
+        self.#sendCommand(_dsc_commands.alarmArmAway(code));
     }
-    alarmArmStay() {
-        self.#sendCommand(_dsc_commands.alarmArmStay());
+    alarmArmStay(code) {
+        self.#sendCommand(_dsc_commands.alarmArmStay(code));
     }
-    alarmArmNight() {
-        self.#sendCommand(_dsc_commands.alarmArmNight());
+    alarmArmNight(code) {
+        self.#sendCommand(_dsc_commands.alarmArmNight(code));
     }
-    alarmDisarm() {
-        self.#sendCommand(_dsc_commands.alarmDisarm());
+    alarmDisarm(code) {
+        self.#sendCommand(_dsc_commands.alarmDisarm(code));
     }
     alarmSendBreak() {
         self.#sendCommand(_dsc_commands.alarmSendBreak());

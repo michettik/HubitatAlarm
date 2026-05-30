@@ -1,38 +1,47 @@
 const nconf = require('nconf');
 nconf.file({ file: './config/config.json' });
 
-const alarmPassword = nconf.get('alarm:alarmpassword');
 const envisalinkPassword = nconf.get('alarm:envisalink:password');
 
 /**
- * Class used to implement all DSC commands
+ * Get the alarm password - uses provided code or falls back to config
+ * @param {String} code - Optional code passed from client
+ * @returns {String} - alarm code
+ */
+function get_alarmPassword(code) {
+    return code || nconf.get('alarm:alarmpassword') || '';
+}
+
+/**
+ * Class used to implement all Honeywell commands
+ * Methods now accept an optional code parameter to override config password
  */
 class honeywell__commands  {
     constructor() {
     }
     // Send the Arm command to Alarm
-    alarmArm() {
-        return alarmPassword+2+'\r\n';
+    alarmArm(code) {
+        return get_alarmPassword(code)+2+'\r\n';
     }
     // Send the ArmAway command to Alarm
-    alarmArmAway() {
-        return alarmPassword+2+'\r\n';
+    alarmArmAway(code) {
+        return get_alarmPassword(code)+2+'\r\n';
     }
     // Send the ArmStay command to Alarm
-    alarmArmStay() {
-        return alarmPassword+3+'\r\n';
+    alarmArmStay(code) {
+        return get_alarmPassword(code)+3+'\r\n';
     }
     // Send the ArmNight command to Alarm
-    alarmArmNight() {
-        return alarmPassword+7+'\r\n';
+    alarmArmNight(code) {
+        return get_alarmPassword(code)+7+'\r\n';
     }
     // Send the Disarm command to Alarm
-    alarmDisarm() {
-        return alarmPassword+1+'\r\n';
+    alarmDisarm(code) {
+        return get_alarmPassword(code)+1+'\r\n';
     }
     // Send the Enable Chime command to Alarm
-    alarmChimeToggle() {
-        return alarmPassword+9+'\r\n';
+    alarmChimeToggle(code) {
+        return get_alarmPassword(code)+9+'\r\n';
     }
     // This command will send the code to EnvisaLink when ever necessary
     alarmEnvisalinkLogin() {

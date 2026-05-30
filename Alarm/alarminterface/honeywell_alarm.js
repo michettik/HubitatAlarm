@@ -23,23 +23,23 @@ class honeywell_alarm extends EventEmitter {
         this.#honeywell_envisalink();
     }
 
-    alarmArm() {
-        self.#sendCommand(_honeywell_commands.alarmArm());
+    alarmArm(code) {
+        self.#sendCommand(_honeywell_commands.alarmArm(code));
     }
-    alarmArmAway() {
-        self.#sendCommand(_honeywell_commands.alarmArmAway());
+    alarmArmAway(code) {
+        self.#sendCommand(_honeywell_commands.alarmArmAway(code));
     }
-    alarmArmStay() {
-        self.#sendCommand(_honeywell_commands.alarmArmStay());
+    alarmArmStay(code) {
+        self.#sendCommand(_honeywell_commands.alarmArmStay(code));
     }
-    alarmArmNight() {
-        self.#sendCommand(_honeywell_commands.alarmArmNight());
+    alarmArmNight(code) {
+        self.#sendCommand(_honeywell_commands.alarmArmNight(code));
     }
-    alarmDisarm() {
-        self.#sendCommand(_honeywell_commands.alarmDisarm());
+    alarmDisarm(code) {
+        self.#sendCommand(_honeywell_commands.alarmDisarm(code));
     }
-    alarmChimeToggle() {
-        self.#sendCommand(_honeywell_commands.alarmChimeToggle());
+    alarmChimeToggle(code) {
+        self.#sendCommand(_honeywell_commands.alarmChimeToggle(code));
     }
     alarmEnvisalinkLogin() {
         self.#sendCommand(_honeywell_commands.alarmEnvisalinkLogin());

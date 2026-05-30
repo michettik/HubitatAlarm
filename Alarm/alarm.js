@@ -47,7 +47,7 @@ wss.on('connection', function connection(ws) {
     wssend = ws;
 
     // Expected to received Alarm commands
-    // Ex: JSON --> {"command":"alarmArmAway"}
+    // Ex: JSON --> {"command":"alarmArmAway"} or {"command":"alarmDisarm","code":"1234"}
     ws.on('message', function incoming(rcv_msg) {
         //log.verbose('[Alarm] WSS Server received message: ' + rcv_msg.toString('ascii'));
         let json_rcv_msg = JSON.parse(rcv_msg);
@@ -55,7 +55,9 @@ wss.on('connection', function connection(ws) {
             log.debug('[Alarm] WSS received a valid command: '+json_rcv_msg.command);
             try{
                 let responseHandler = alarm_command_map[json_rcv_msg.command];
-                responseHandler();
+                // Pass the code if provided in the message
+                let code = json_rcv_msg.code || null;
+                responseHandler(code);
             }
             catch{
                 log.info('[Alarm] WSS received a command thats not implemented');
@@ -84,7 +86,9 @@ app.get('/', function (req, res) {
 app.get('/api/:command',function (req, res) {
     try {
         let responseHandler = alarm_command_map[req.params.command];
-        responseHandler();
+        // Support code via query parameter: /api/alarmDisarm?code=1234
+        let code = req.query.code || null;
+        responseHandler(code);
         res.end();
     } catch (error) {
         res.status(404).send("Alarm command not found: "+req.params.command);

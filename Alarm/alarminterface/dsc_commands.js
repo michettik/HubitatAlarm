@@ -1,34 +1,47 @@
 const nconf = require('nconf');
 nconf.file({ file: './config/config.json' });
 
-const alarmPassword = nconf.get('alarm:alarmpassword');
 const envisalinkPassword = nconf.get('alarm:envisalink:password');
 
 /**
+ * Get the alarm password - uses provided code or falls back to config
+ * @param {String} code - Optional code passed from client
+ * @returns {String} - 6-digit alarm code (padded if necessary)
+ */
+function get_alarmPassword(code) {
+    let password = code || nconf.get('alarm:alarmpassword');
+    if (password && password.length == 4) {
+        return password + '00';
+    }
+    return password || '';
+}
+
+/**
  * Class used to implement all DSC commands
+ * Methods now accept an optional code parameter to override config password
  */
 class dsc_commands  {
     constructor() {
     }
     // Send the Arm command to Alarm
-    alarmArm() {
-        return appendChecksum('0331' + get_alarmPassword());
+    alarmArm(code) {
+        return appendChecksum('0331' + get_alarmPassword(code));
     }
     // Send the ArmAway command to Alarm
-    alarmArmAway() {
+    alarmArmAway(code) {
         return appendChecksum('0301');
     }
     // Send the ArmStay command to Alarm
-    alarmArmStay() {
+    alarmArmStay(code) {
         return appendChecksum('0311');
     }
     // Send the ArmNight command to Alarm
-    alarmArmNight() {
-        return appendChecksum('0331' + get_alarmPassword());
+    alarmArmNight(code) {
+        return appendChecksum('0331' + get_alarmPassword(code));
     }
     // Send the Disarm command to Alarm
-    alarmDisarm() {
-        return appendChecksum('0401' + get_alarmPassword());
+    alarmDisarm(code) {
+        return appendChecksum('0401' + get_alarmPassword(code));
     }
     // Send the Break command to Alarm
     alarmSendBreak() {
@@ -55,8 +68,8 @@ class dsc_commands  {
         return appendChecksum('0501');
     }
     // This command will send the code to the alarm when ever the alarm ask for it with a 900
-    alarmSendCode() {
-        return appendChecksum('2001' + get_alarmPassword());
+    alarmSendCode(code) {
+        return appendChecksum('2001' + get_alarmPassword(code));
     }
     // This command will send the code to the alarm when ever the alarm ask for it with a 900
     alarmEnvisalinkLogin() {
@@ -130,15 +143,6 @@ function alarmSetBaudRate(speed) {
         cmd = cmd + '0';
     }
     return cmd;
-}
-
-function get_alarmPassword() {
-    if(alarmPassword.length ==4){
-        return alarmPassword+'00';
-    }
-    else{
-        return alarmPassword
-    }
 }
 
 /**
