@@ -1,4 +1,4 @@
-FROM node:fermium-alpine
+FROM node:18-alpine
 
 WORKDIR /opt/Alarm
 COPY . .
