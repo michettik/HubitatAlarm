@@ -1,6 +1,6 @@
 # HomeAssistant Alarm
 
-> **This project is a fork of [HubitatAlarm](https://github.com/Welasco/HubitatAlarm) by [Victor Santana (Welasco)](https://github.com/Welasco).** All credit for the original architecture, DSC/Honeywell protocol implementation, and core functionality goes to Victor. This fork adapts the project for Home Assistant integration with additional features like dynamic alarm code passing.
+> **Special thanks to my colleague [Victor Santana (Welasco)](https://github.com/Welasco)** for creating the original [HubitatAlarm](https://github.com/Welasco/HubitatAlarm) project. All credit for the architecture, DSC/Honeywell protocol implementation, and core functionality goes to Victor. This fork adapts his excellent work for Home Assistant integration.
 
 HomeAssistant Alarm is a solution to integrate [DSC (IT-100 or Envisalink)](https://www.dsc.com/) or [Honeywell (Envisalink)](https://www.honeywellhome.com/) alarm system to Home Assistant. It will allow you to control your home alarm (DSC or Honeywell) using Home Assistant from everywhere.
 
@@ -140,17 +140,15 @@ Use this server with the [HomeAssistant-DSC-IT-100](https://github.com/michettik
 
 ## Credits & Acknowledgments
 
-This project would not exist without the excellent work of **[Victor Santana (Welasco)](https://github.com/Welasco)**.
+Special thanks to my colleague **[Victor Santana (Welasco)](https://github.com/Welasco)** for creating the original **[HubitatAlarm](https://github.com/Welasco/HubitatAlarm)** project.
 
-The original **[HubitatAlarm](https://github.com/Welasco/HubitatAlarm)** project provides:
+Victor's original work provides:
 - Complete DSC IT-100 and Envisalink serial/network integration
 - Honeywell alarm system support
 - WebSocket and API communication layer
 - Node.js bridge architecture
 - Docker containerization
 - Comprehensive documentation
-
-**Thank you, Victor, for creating and open-sourcing this project!**
 
 ### Changes in this fork:
 - Rebranded for Home Assistant (originally designed for Hubitat)
